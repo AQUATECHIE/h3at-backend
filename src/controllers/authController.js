@@ -34,13 +34,48 @@ export const registerUser = async (req, res) => {
 
   await sendEmail({
     email: user.email,
-    subject: "Your OTP Code",
+    subject: "Welcome to H3AT ONLY – Verify Your Email",
     message: `
-      <h2>Email Verification OTP</h2>
-      <p>Your verification code is:</p>
-      <h1>${rawOtp}</h1>
-      <p>This code expires in 10 minutes.</p>
-    `
+  <div style="font-family: Arial, sans-serif; background:#f4f6fb; padding:30px;">
+    
+    <div style="max-width:600px; margin:auto; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
+      
+      <div style="background:linear-gradient(135deg,#7b2ff7,#f107a3); padding:25px; text-align:center;">
+        <h1 style="color:white; margin:0; letter-spacing:2px;">H3AT ONLY</h1>
+      </div>
+
+      <div style="padding:30px;">
+        <h2 style="color:#333;">Welcome, ${name}! 👋</h2>
+        
+        <p style="color:#555; font-size:15px; line-height:1.6;">
+          Thank you for joining <strong>H3AT ONLY</strong>.  
+          To complete your registration, please verify your email using the OTP code below.
+        </p>
+
+        <div style="margin:30px 0; text-align:center;">
+          <div style="display:inline-block; background:#f4f6fb; padding:20px 30px; border-radius:8px;">
+            <span style="font-size:32px; letter-spacing:6px; font-weight:bold; color:#7b2ff7;">
+              ${rawOtp}
+            </span>
+          </div>
+        </div>
+
+        <p style="color:#666; font-size:14px;">
+          This verification code will expire in <strong>10 minutes</strong>.
+        </p>
+
+        <p style="color:#666; font-size:14px;">
+          If you did not create an account on <strong>H3AT ONLY</strong>, please ignore this email.
+        </p>
+      </div>
+
+      <div style="background:#f4f6fb; padding:20px; text-align:center; font-size:13px; color:#777;">
+        © ${new Date().getFullYear()} H3AT ONLY. All rights reserved.
+      </div>
+
+    </div>
+  </div>
+  `
   });
 
   res.status(201).json({
@@ -113,7 +148,7 @@ export const verifyOtp = async (req, res) => {
 };
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: "30d"
-    });
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d"
+  });
 };

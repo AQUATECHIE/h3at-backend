@@ -10,7 +10,7 @@ const sendEmail = async (options) => {
   });
 
   const mailOptions = {
-    from: `"Ecommerce App" <${process.env.EMAIL_USER}>`,
+    from: `"H3AT ONLY" <${process.env.EMAIL_USER}>`,
     to: options.email,
     subject: options.subject,
     html: options.message
