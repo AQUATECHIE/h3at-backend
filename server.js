@@ -8,6 +8,7 @@ import productRoutes from "./src/routes/productRoutes.js";
 import cartRoutes from "./src/routes/cartRoutes.js";
 import orderRoutes from "./src/routes/orderRoutes.js";
 import adminRoutes from "./src/routes/adminRoutes.js";
+import addressRoutes from "./src/routes/addressRoutes.js";
 
 connectDB();
 
@@ -21,6 +22,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/address", addressRoutes);
 
 const PORT = process.env.PORT || 5000;
 
