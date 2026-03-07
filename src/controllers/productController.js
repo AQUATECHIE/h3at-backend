@@ -46,7 +46,7 @@ export const getProducts = async (req, res) => {
       brand,
       sort,
       page = 1,
-      limit = 10,
+      limit = 6,
       keyword
     } = req.query;
 
