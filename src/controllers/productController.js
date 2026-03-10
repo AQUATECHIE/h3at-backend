@@ -3,14 +3,15 @@ import Product from "../models/Product.js";
 export const createProduct = async (req, res) => {
   try {
     const {
-      name,
-      description,
-      price,
-      category,
-      brand,
-      stock,
-      specifications
-    } = req.body;
+  name,
+  description,
+  price,
+  discount,
+  category,
+  brand,
+  stock,
+  specifications
+} = req.body;
 
     const imageData = req.files.map(file => ({
       url: file.path,
@@ -21,6 +22,7 @@ export const createProduct = async (req, res) => {
       name,
       description,
       price,
+      discount,
       category,
       brand,
       stock,
