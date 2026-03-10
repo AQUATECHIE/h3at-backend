@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
     <div style="max-width:600px; margin:auto; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
       
       <div style="background:linear-gradient(135deg,#7b2ff7,#f107a3); padding:25px; text-align:center;">
-        <h1 style="color:white; margin:0; letter-spacing:2px;">H3AT ONLY</h1>
+        <h1 style="color:white; margin:0; letter-spacing:2px;">HEAT ONLY</h1>
       </div>
 
       <div style="padding:30px;">
@@ -65,7 +65,7 @@ export const registerUser = async (req, res) => {
         </p>
 
         <p style="color:#666; font-size:14px;">
-          If you did not create an account on <strong>H3AT ONLY</strong>, please ignore this email.
+          If you did not create an account on <strong>HEAT ONLY</strong>, please ignore this email.
         </p>
       </div>
 
