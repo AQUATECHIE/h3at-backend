@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
 
   await sendEmail({
     email: user.email,
-    subject: "Welcome to H3AT ONLY – Verify Your Email",
+    subject: "Welcome to HEAT ONLY – Verify Your Email",
     message: `
   <div style="font-family: Arial, sans-serif; background:#f4f6fb; padding:30px;">
     
@@ -48,7 +48,7 @@ export const registerUser = async (req, res) => {
         <h2 style="color:#333;">Welcome, ${name}! 👋</h2>
         
         <p style="color:#555; font-size:15px; line-height:1.6;">
-          Thank you for joining <strong>H3AT ONLY</strong>.  
+          Thank you for joining <strong>HEAT ONLY</strong>.  
           To complete your registration, please verify your email using the OTP code below.
         </p>
 
