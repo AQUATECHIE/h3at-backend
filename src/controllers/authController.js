@@ -2,7 +2,7 @@ import User from "../models/Users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import sendEmail from "../utils/sendEmail.js";
+import {sendEmail} from "../utils/sendEmail.js";
 
 
 // REGISTER
