@@ -147,6 +147,84 @@ export const verifyOtp = async (req, res) => {
   res.json({ message: "Account verified successfully" });
 };
 
+export const resendOtp = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "Account already verified" });
+    }
+
+    // Generate new OTP
+    const rawOtp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Hash OTP
+    const hashedOtp = crypto
+      .createHash("sha256")
+      .update(rawOtp)
+      .digest("hex");
+
+    user.otp = hashedOtp;
+    user.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+    await user.save();
+
+    await sendEmail({
+      email: user.email,
+      subject: "HEAT ONLY – Your New Verification Code",
+      message: `
+      <div style="font-family: Arial, sans-serif; background:#f4f6fb; padding:30px;">
+        
+        <div style="max-width:600px; margin:auto; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
+          
+          <div style="background:linear-gradient(135deg,#7b2ff7,#f107a3); padding:25px; text-align:center;">
+            <h1 style="color:white; margin:0;">HEAT ONLY</h1>
+          </div>
+
+          <div style="padding:30px; text-align:center;">
+            
+            <h2>Your New OTP Code</h2>
+
+            <div style="margin:25px 0;">
+              <span style="font-size:32px; letter-spacing:6px; font-weight:bold; color:#7b2ff7;">
+                ${rawOtp}
+              </span>
+            </div>
+
+            <p style="color:#666;">
+              This code will expire in <strong>10 minutes</strong>.
+            </p>
+
+          </div>
+
+          <div style="background:#f4f6fb; padding:20px; text-align:center; font-size:13px; color:#777;">
+            © ${new Date().getFullYear()} HEAT ONLY
+          </div>
+
+        </div>
+
+      </div>
+      `
+    });
+
+    res.json({
+      message: "A new OTP has been sent to your email"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to resend OTP"
+    });
+  }
+};
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d"

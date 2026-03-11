@@ -10,7 +10,7 @@ const sendEmail = async (options) => {
   });
 
   const mailOptions = {
-    from: `"HEAT ONLY" <${process.env.EMAIL_USER}>`,
+    from: `"HEAT ONLY" <HEATONLY.com>`,
     to: options.email,
     subject: options.subject,
     html: options.message
