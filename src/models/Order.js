@@ -6,6 +6,7 @@ const orderItemSchema = mongoose.Schema({
     ref: "Product",
     required: true,
   },
+
   name: String,
   price: Number,
   image: String,
@@ -14,35 +15,48 @@ const orderItemSchema = mongoose.Schema({
 });
 
 const orderSchema = mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-
-    orderItems: [orderItemSchema],
-
-    shippingAddress: {
-      firstName: String,
-      lastName: String,
-      email: String,
-      phone: String,
-      address: String,
-      city: String,
-    },
-
-    subtotal: Number,
-    shipping: Number,
-    totalAmount: Number,
-
-    status: {
-      type: String,
-      enum: ["pending", "paid", "shipped", "delivered"],
-      default: "pending",
-    },
+{
+  /* USER ORDER (optional now) */
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false
   },
-  { timestamps: true }
+
+  /* GUEST ORDER */
+  guestEmail: {
+    type: String
+  },
+
+  orderItems: [orderItemSchema],
+
+  shippingAddress: {
+    firstName: String,
+    lastName: String,
+    email: String,
+    phone: String,
+    address: String,
+    city: String,
+  },
+
+  subtotal: Number,
+  shipping: Number,
+  totalAmount: Number,
+
+  status: {
+    type: String,
+    enum: ["pending", "paid", "shipped", "delivered"],
+    default: "pending",
+  },
+
+  /* optional useful field */
+  paymentMethod: {
+    type: String,
+    default: "whatsapp"
+  }
+
+},
+{ timestamps: true }
 );
 
 const Order = mongoose.model("Order", orderSchema);
