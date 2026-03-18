@@ -10,6 +10,7 @@ import orderRoutes from "./src/routes/orderRoutes.js";
 import adminRoutes from "./src/routes/adminRoutes.js";
 import addressRoutes from "./src/routes/addressRoutes.js";
 import newsletterRoutes from "./src/routes/newsletterRoutes.js";
+import heroRoutes from "./src/routes/heroRoutes.js"
 
 connectDB();
 
@@ -25,6 +26,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/address", addressRoutes);
 app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/hero", heroRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
