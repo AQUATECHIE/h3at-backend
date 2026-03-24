@@ -178,14 +178,14 @@ export const resendOtp = async (req, res) => {
 
     await sendEmail({
       email: user.email,
-      subject: "HEAT ONLY – Your New Verification Code",
+      subject: "HEATONLY – Your New Verification Code",
       message: `
       <div style="font-family: Arial, sans-serif; background:#f4f6fb; padding:30px;">
         
         <div style="max-width:600px; margin:auto; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.08);">
           
           <div style="background:linear-gradient(135deg,#7b2ff7,#f107a3); padding:25px; text-align:center;">
-            <h1 style="color:white; margin:0;">HEAT ONLY</h1>
+            <h1 style="color:white; margin:0;">HEATONLY</h1>
           </div>
 
           <div style="padding:30px; text-align:center;">
@@ -205,7 +205,7 @@ export const resendOtp = async (req, res) => {
           </div>
 
           <div style="background:#f4f6fb; padding:20px; text-align:center; font-size:13px; color:#777;">
-            © ${new Date().getFullYear()} HEAT ONLY
+            © ${new Date().getFullYear()} HEATONLY
           </div>
 
         </div>
