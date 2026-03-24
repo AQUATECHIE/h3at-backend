@@ -3,15 +3,15 @@ import Product from "../models/Product.js";
 export const createProduct = async (req, res) => {
   try {
     const {
-  name,
-  description,
-  price,
-  discount,
-  category,
-  brand,
-  stock,
-  specifications
-} = req.body;
+      name,
+      description,
+      price,
+      discount,
+      category,
+      brand,
+      stock,
+      specifications
+    } = req.body;
 
     const imageData = req.files.map(file => ({
       url: file.path,
@@ -142,6 +142,7 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
+
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -152,15 +153,17 @@ export const updateProduct = async (req, res) => {
       name,
       description,
       price,
+      discount,
       category,
       brand,
       stock,
-      specifications,
-    } = req.body;
+      specifications
+    } = req.body || {};
 
     product.name = name || product.name;
     product.description = description || product.description;
     product.price = price || product.price;
+    product.discount = discount || product.discount;
     product.category = category || product.category;
     product.brand = brand || product.brand;
     product.stock = stock || product.stock;
@@ -172,6 +175,7 @@ export const updateProduct = async (req, res) => {
     await product.save();
 
     res.json(product);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
