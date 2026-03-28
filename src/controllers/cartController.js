@@ -2,7 +2,8 @@ import Cart from "../models/Cart.js";
 import Product from "../models/Product.js";
 
 export const addToCart = async (req, res) => {
-  const { productId, quantity } = req.body;
+
+  const { productId, quantity, selectedSize } = req.body;
 
   const product = await Product.findById(productId);
 
@@ -25,16 +26,21 @@ export const addToCart = async (req, res) => {
   }
 
   const itemIndex = cart.items.findIndex(
-    item => item.product.toString() === productId
+    item =>
+      item.product.toString() === productId &&
+      item.selectedSize === selectedSize
   );
 
   if (itemIndex > -1) {
     cart.items[itemIndex].quantity += quantity;
   } else {
-    cart.items.push({ product: productId, quantity });
+    cart.items.push({
+      product: productId,
+      quantity,
+      selectedSize
+    });
   }
 
-  // Recalculate total
   let total = 0;
 
   for (const item of cart.items) {
@@ -47,6 +53,7 @@ export const addToCart = async (req, res) => {
   await cart.save();
 
   res.json(cart);
+
 };
 
 // get user cart 
