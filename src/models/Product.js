@@ -1,63 +1,63 @@
 import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema(
-{
-  name: {
-    type: String,
-    required: true
-  },
+  {
+    name: {
+      type: String,
+      required: true
+    },
 
-  description: {
-    type: String,
-    required: true
-  },
+    description: {
+      type: String,
+      required: true
+    },
 
-  price: {
-    type: Number,
-    required: true
-  },
+    price: {
+      type: Number,
+      required: true
+    },
 
-  // NEW
-  discount: {
-    type: Number,
-    default: 0
-  },
+    // NEW
+    discount: {
+      type: Number,
+      default: 0
+    },
 
-  // NEW
-  finalPrice: {
-    type: Number
-  },
+    // NEW
+    finalPrice: {
+      type: Number
+    },
 
-  category: {
-    type: String,
-    enum: ["shoes", "bags", "clothes"],
-    required: true
-  },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true
+    },
 
-  brand: String,
+    brand: String,
 
-  stock: {
-    type: Number,
-    default: 0
-  },
+    stock: {
+      type: Number,
+      default: 0
+    },
 
-  images: [
-    {
-      url: String,
-      public_id: String
+    images: [
+      {
+        url: String,
+        public_id: String
+      }
+    ],
+
+    specifications: {
+      type: Object
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
     }
-  ],
-
-  specifications: {
-    type: Object
   },
-
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
-},
-{ timestamps: true }
+  { timestamps: true }
 );
 
 
