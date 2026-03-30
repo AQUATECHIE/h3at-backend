@@ -169,7 +169,13 @@ export const updateProduct = async (req, res) => {
     product.stock = stock || product.stock;
 
     if (specifications) {
-      product.specifications = JSON.parse(specifications);
+
+      if (typeof specifications === "string") {
+        product.specifications = JSON.parse(specifications);
+      } else {
+        product.specifications = specifications;
+      }
+
     }
 
     await product.save();
